@@ -18,12 +18,14 @@ public class OrderService {
         log.info("주문");
         stock.decrementAndGet();
         sleep(500);
+        log.info("주문 완료");
     }
 
     public void cancel() {
         log.info("주문 취소");
         stock.incrementAndGet();
         sleep(200);
+        log.info("주문 취소 완료");
     }
 
     public int getStock() {
