@@ -28,4 +28,12 @@ public class OrderController {
         orderService.cancel();
         return "ok";
     }
+
+    @GetMapping("/stock")
+    public int stock() {
+        log.info("재고 수량 요청");
+        return orderService.getStock();
+    }
+
+
 }
