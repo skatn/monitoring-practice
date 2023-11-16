@@ -16,7 +16,7 @@ public class MDCLoggingFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         UUID uuid = UUID.randomUUID();
-        MDC.put("request_id", uuid.toString());
+        MDC.put("traceId", uuid.toString());
         chain.doFilter(request, response);
         MDC.clear();    // 쓰레드 풀을 통해 해당 스레드를 재사용하기 때문에 clear 해줘야함
     }

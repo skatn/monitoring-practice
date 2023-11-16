@@ -24,4 +24,20 @@ public class TestController {
 
         return "ok";
     }
+
+    @GetMapping("/log")
+    public String log() {
+        log.trace("log trace");
+        log.debug("log debug");
+        log.info("log info");
+        log.warn("log warn");
+        log.error("log error");
+
+        return "ok";
+    }
+
+    @GetMapping("/error")
+    public void error() {
+        throw new RuntimeException("런타임 에러");
+    }
 }
