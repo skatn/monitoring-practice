@@ -3,6 +3,8 @@
     <property name="LOG_FILE_NAME" value="errorLog"/>
     <property name="LOG_FILE_INFO_NAME" value="infoLog"/>
     <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [traceId=%X{traceId}] [%thread] [%logger{40}] - %msg%n"/>
+    <property name="MAX_HISTORY" value="7" />
+    <property name="TOTAL_SIZE" value="10KB" />
 
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -25,19 +27,20 @@
         </encoder>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/%d{yyyy-MM, aux}/${LOG_FILE_NAME}.%d{yyyy-MM-dd}.gz</fileNamePattern>
-            <totalSizeCap>20GB</totalSizeCap>
+            <fileNamePattern>${LOG_PATH}/%d{yyyy-MM, aux}/${LOG_FILE_NAME}.%d{yyyy-MM-dd HH-mm}.gz</fileNamePattern>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <totalSizeCap>${TOTAL_SIZE}</totalSizeCap>
         </rollingPolicy>
 
     </appender>
 
     <appender name="FILE_ALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
 
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
-            <level>INFO</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
-        </filter>
+<!--        <filter class="ch.qos.logback.classic.filter.LevelFilter">-->
+<!--            <level>INFO</level>-->
+<!--            <onMatch>ACCEPT</onMatch>-->
+<!--            <onMismatch>DENY</onMismatch>-->
+<!--        </filter>-->
 
         <file>${LOG_PATH}/${LOG_FILE_INFO_NAME}.log</file>
 
@@ -46,9 +49,9 @@
         </encoder>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>${LOG_PATH}/%d{yyyy-MM, aux}/${LOG_FILE_INFO_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>30</maxHistory>
-            <totalSizeCap>20GB</totalSizeCap>
+            <fileNamePattern>${LOG_PATH}/%d{yyyy-MM, aux}/${LOG_FILE_INFO_NAME}.%d{yyyy-MM-dd HH-mm}.gz</fileNamePattern>
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+            <totalSizeCap>${TOTAL_SIZE}</totalSizeCap>
         </rollingPolicy>
 
     </appender>
